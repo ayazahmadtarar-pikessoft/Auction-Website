@@ -1,0 +1,164 @@
+﻿@*@model IEnumerable<auction.Models.Product>*@
+@model Tuple<List<auction.Models.Product>, List<SelectListItem>>
+
+
+@*@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>*@
+
+@Html.DropDownList("CategoryID", null, new { @id = "testID"  })
+
+
+
+ 
+@if (@User.Identity.IsAuthenticated)
+{
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@
+       
+        @*@HttpContext.Current.User.Identity.Name*@
+
+        <input type="button" value="Create" class="btn btn-primary btn-block" onclick="location.href='@Url.Action("Create", "Products")'" />
+
+    </p>
+
+}
+
+@*@Html.DisplayNameFor(model => model.Category)
+@Html.DropDownList("categoryid", null, htmlAttributes: new { @class = "form-control" })*@
+
+
+
+
+@if (Session["UserProfile"] != null)
+{
+    <br />
+    <input type="button" value="Add New Product" class="btn btn-primary btn-block" onclick="location.href='@Url.Action("additem", "Products")'" />
+    <br/>
+}
+@*@Html.DropDownList("CategoryID");*@
+
+
+
+<div id="prolist">
+
+    <div class="row">
+
+
+
+
+        @foreach (var item in Model.Item1)
+            {
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <div class="cuadro_intro_hover " style="background-color:#cccccc;">
+                        <p style="text-align:center; ">
+
+
+                            @if (item.Name != null && item.Path != null)
+                            {  <img src="@Url.Content(item.Path)" class="img-responsive" alt="" /> }
+
+
+                            @*<img src="~/Images/laptop.jpg" class="img-responsive" alt="">*@
+                        </p>
+                        <div class="caption">
+                            <div class="blur"></div>
+                            <div class="caption-text">
+                                <h3 style="border-top:2px solid white; border-bottom:2px solid white; padding:10px;">@Html.DisplayFor(modelItem => item.Title)</h3>
+                                <p>@Html.DisplayFor(modelItem => item.Discription).ToString()</p>
+                                <a class=" btn btn-default" href="#"><span class="glyphicon glyphicon-picture"> INFO</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    @*<img src="~/Images/laptop.jpg" alt="Image " style="height:151px; width: 192px;">*@
+                    <div class="caption">
+                        <h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+                        <p>
+                            @if (Html.DisplayFor(modelItem => item.Discription).ToString().Length > 150)
+                            {
+                                @Html.DisplayFor(modelItem => item.Discription).ToString().Substring(0, 150);
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.Discription).ToString();@*.Substring(0, 120)....*@
+
+                            }
+
+
+                        </p>
+
+                        <p>@Html.DisplayFor(modelItem => item.status)</p>
+                        <p>
+                            Price:
+                            <label class="pull-right">@Html.DisplayFor(modelItem => item.Price)</label>
+                        </p>
+                        <p>
+                            <a class="btn btn-primary" role="button">Details</a>
+                            @Html.ActionLink("Details", "Details", new { id = item.ID })
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+    <link href="~/Content/images.css" rel="stylesheet" />
+
+ <script src="~/Scripts/jquery-1.10.2.js"></script>
+
+
+<div>
+    <script>
+
+        $(document).ready(
+            function () {
+                $("#testID").change
+                    (
+
+                           
+           
+                        function () {
+                         
+                            var val1 = $("#testID").val();
+                            //alert(val1)
+
+                            $.ajax(
+                            {
+                                url: "/Products/showdata? &id=" + val1,
+                                type: "POST",
+                                
+                            }
+                        )
+
+                    .success(function (data) {
+                       
+                        //alert(data);
+                        
+                        //alert("on change called")
+                        $("#prolist").replaceWith(data);
+                        
+                    })
+                     .error(function () {
+                         alert(111);
+
+                     });
+
+
+                            //alert("on change called")
+                        }
+                    )
+            }
+        );
+        function addbidinview() {
+
+            alert('function called with values');
+
+        }
+
+
+
+    </script>
+</div>

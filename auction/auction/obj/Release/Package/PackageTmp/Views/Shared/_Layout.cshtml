@@ -1,0 +1,434 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top" >
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header pull-left">
+                <a class="navbar-brand" href="#">
+                    <img alt="Brand" src="~/Images/AMS_Logo.png" style="height: 51px; width: 121px" />
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+                <ul class="nav navbar-nav pull-right">
+                    @{
+                        if (Session["UserProfile"] == null)
+                        {
+                            <li data-toggle="modal" data-target="#loginModal"><a href="#">Login <span class="sr-only">(current)</span></a></li>
+                            <li data-toggle="modal" data-target="#signupModal"><a href="#">Signup</a></li>
+                            <li><button class="btn btn-default" type="button" style="margin-top:10px" id="search">Search Product</button></li>
+                        }
+                        else
+                        {
+                            auction.Models.User profile = (auction.Models.User)Session["UserProfile"];
+
+                            <li><h3><a href="#" id="username" class="glyphicon glyphicon-user" style="padding-right:10px" onclick="location.href='@Url.Action("Details/"+profile.userID, "Users")'">@profile.username</a></h3></li>
+                           <li><h3> <a href="#" id="logoutbtn" class="glyphicon glyphicon-log-out" style="padding-right:10px">Logout</a></h3> </li>
+                           <li><button class="btn btn-default" type="button" style="margin-top:25px " id="search">Search Product</button></li>
+
+                        }
+                         
+                    }
+                    
+                     
+                    
+                    
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @* login model *@
+    <div class="modal fade" id="loginModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h1 class="text-center">Login</h1>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form col-md-12 center-block">
+
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" placeholder="Email" id="email"  />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control input-lg" placeholder="Password" id="password"  />
+                        </div>
+
+                        <div class="form-group"> 
+                                <input id="loginbtn" type="submit" value="Sign" class="btn btn-primary btn-block"   />
+                        </div>
+                        <div class="form-group">
+                            <input id="signupbtn" type="submit" class="btn btn-primary btn-block"  data-toggle="modal" data-target="#signupModal" data-dismiss="modal" value="Signup" />
+                            @*<Button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#signupModal" data-dismiss="modal" value="Signup" />*@
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    @* signup modal *@
+    <div class="modal fade" id="signupModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h1 class="text-center">Signup</h1>
+                </div>
+                <div class="modal-body center-block" >
+                   <form class="form col-md-12 center-block">
+                    
+                        <div class="form-group">
+                            
+                          <input type="Text" class="form-control input-lg" placeholder="First Name" id="fname" required >
+                        </div>
+                        <div class="form-group">
+                            <input type="Text" class="form-control input-lg" placeholder="Last Name" id="lname" required >
+                        </div>
+                         
+                       <div class="form-control input-lg" id="gender">
+                           @Html.DropDownList("Gender", new List<SelectListItem>{
+                              new SelectListItem{ Text="Male", Value="Male"},
+                              new SelectListItem{ Text="Female", Value="Female"}
+        } 
+        )
+                       </div>
+
+
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" placeholder="Email" id="emailid"  required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control input-lg" placeholder="Password" id="userpassword"  required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" placeholder="username" id="username" required >
+                        </div>
+                        <div class="form-group">
+                            <input type="date" class="form-control input-lg" placeholder="Date of birth" id="dob" required>
+                        </div>
+                       <div class="form-group">
+                           <input type="Text" class="form-control input-lg" id="city" placeholder="your city" required>
+                       </div>
+
+                        <div class="form-group">
+                            <input type="Text" class="form-control input-lg" id="Address"placeholder="complete address" >
+                        </div>
+
+                        <div class="form-group">
+                            <input type="Text" class="form-control input-lg" id="MobileNo" placeholder="+92XX-XXXXXXX">
+                        </div>
+
+
+                        <div class="form-group">
+                           
+                            <input id="signupuser" type="submit" class="btn btn-primary btn-lg btn-block"  value="Signup" />
+
+                        </div>
+                        <div class="form-group">
+                            
+                            <input type="submit" class="btn btn-primary btn-lg btn-block" value="Already have account signin here"  data-toggle="modal" data-target="#loginModal" data-dismiss="modal"  />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     
+
+
+     <br />
+    <br />
+
+
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>*@
+
+
+  
+  
+    <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"> Brand</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
+                    <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse navbar-menubuilder">
+                
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/products">Products</a>
+                    </li>
+                    <li>
+                        <a href="/About">Faq</a>
+                    </li>
+                    <li>
+                        <a href="/contact">Contact Us</a>
+                    </li>
+                     
+                   
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+
+    <link href="~/Content/custom_nav.css" rel="stylesheet" />
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        
+            <footer style="background-color:#e7e7e7 ">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h3>Auction website</h3>
+                       <ul>
+                           <li>Home</li>
+                           <li>Product</li>
+                           <li>Contact us</li>
+
+                       </ul>
+                    </div>
+
+                    <div class="col-lg-3">
+
+                    </div>
+                
+
+                    <div class="col-lg-3">
+                        
+                        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+                        <div class="text-center center-block">
+                            <p class="txt-railway">- Bootsnipp.com -</p>
+                            <br />
+                            <a href="https://www.facebook.com/bootsnipp"><i id="social" class="fa fa-facebook-square fa-3x"></i></a>
+                            <a href="https://twitter.com/bootsnipp"><i id="social" class="fa fa-twitter-square fa-3x"></i></a>
+                            <a href="https://plus.google.com/+Bootsnipp-page"><i id="social" class="fa fa-google-plus-square fa-3x"></i></a>
+                            <a href="mailto:bootsnipp@gmail.com"><i id="social" class="fa fa-envelope-square fa-3x"></i></a>
+                        </div> 
+                    </div>
+
+                </div>
+              
+
+                    <div class="row-fluid">
+                    <div class="span12">
+                        <div class="span8">
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Privacy</a>
+                            <a href="#">Security</a>
+                        </div>
+                        <div class="span4">
+                            <p class="muted pull-right">© 2013 Company Name. All rights reserved</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        @*<div class="ma-cols ma-col1">
+            <div class="ma-col-title">
+                <h2>Boli.pk</h2>
+            </div>
+            <div class="ma-col-content">
+                <ul>
+                    <li style="line-height: 40px;"><a href="http://www.boli.pk/">Home page</a></li>
+                    <li style="line-height: 40px;"><a href="http://www.boli.pk/sitemap.xml">Site Map</a></li>
+                    <li style="line-height:40px;"><a href="http://www.boli.pk/privacy-policy.html" title="Privacy Policy">Privacy Policy</a></li>
+                    <li style="line-height:40px;"><a href="http://www.boli.pk/customer-service.html" title="Privacy Policy">Customer Service</a></li>
+                    <li style="line-height:40px;"><a href="http://www.boli.pk/term-and-conditions.html" title="Privacy Policy">Terms &amp; Conditions</a></li>
+                    <li style="line-height:40px;"><a href="http://www.boli.pk/how-to-get-started.html" title="Privacy Policy">How to Get Started</a></li>
+                    <li style="line-height:40px;"><a href="http://www.boli.pk/faq.html" title="Privacy Policy">FAQ</a></li>
+                    <li style="line-height: 40px;"><a href="http://www.boli.pk/closed/0/">Closed Auctions</a></li>
+
+                </ul>
+            </div>
+        </div>*@
+        
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+
+
+    <script>
+
+        $(document).ready(
+            function()
+            {
+                $("#loginbtn").click
+                    (
+                         function ()
+                         {
+
+                             var fname = $("#email").val();
+                             var pass = $("#password").val();
+                             alert("Sucessfully called 1st" +fname +pass )
+                            $.ajax(
+                            {
+
+                                url: "/Users/login?email=" + fname + "&pass=" + pass
+                            }
+                        ).done(setTimeout(
+                                function () {
+                                    alert("Sucessfully called 2nd" + $("#email").val() + $("#password").val())
+
+
+                                }, 1000)
+
+                        );
+                            alert("sd")
+                        }
+                    )
+            }
+        );
+
+
+
+
+    </script>
+    <script>
+
+        $(document).ready(
+            function()
+            {
+                $("#signupuser").click
+                    (
+                         function ()
+                         {
+                             var username = $("#username").val();
+                             var fname = $("#fname").val();
+                             var lname = $("#lname").val();
+                             var email = $("#emailid").val();
+                             var password = $("#userpassword").val();
+                             var dob = $("#dob").val();
+                             var city = $("#city").val();
+                             var address = $("#Address").val();
+                             var gender = $("#gender").val();
+                             var mobile = $("#MobileNo").val();
+                            alert("Signup 1st" )
+                            $.ajax(
+                            {
+
+                                url: "/Users/signup?username=" + username + "&fname=" + fname + "&lname=" + lname + "&email=" + email + "&password=" + password + "&dob=" + dob + "&city=" + city + "&address=" + address + "&gender=" + gender + "&mobile=" + mobile
+                            }
+                        ).done(setTimeout(
+                                function () {
+                                    alert("Sucessfully called signup")
+
+
+                                }, 1000)
+
+                        );
+                            alert("signup")
+                        }
+                    )
+            }
+        );
+
+
+
+
+    </script>
+    <script>
+
+        $(document).ready(
+            function()
+            {
+                $("#logoutbtn").click
+                    (
+                         function ()
+                         {
+
+                            
+                           
+                            $.ajax(
+                            {
+
+                                url: "/Users/logout"
+                            }
+                        ).done(setTimeout(
+                                function () {
+                                    alert("logout called")
+
+
+                                }, 1000)
+
+                        );
+                            alert("function done")
+                        }
+                    )
+            }
+            
+        );
+
+
+
+
+    </script>
+
+    <script>
+        $.ready(function () {
+            $('#addproduct').click(function () {
+                alert("hello");
+            })
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-auction-20150903124349.mdf;Initial Catalog=aspnet-auction-20150903124349;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Ayaz-T\\Desktop\\auction\\auction\\auction\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="auctionContext-Web.config Connection String" description="auctionContext Connection String used in web.config by the application to access the database." defaultValue="Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=auctionContext-20150903124747; Integrated Security=True; MultipleActiveResultSets=True; AttachDbFilename=|DataDirectory|auctionContext-20150903124747.mdf" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Ayaz-T\\Desktop\\auction\\auction\\auction\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='auctionContext']/@connectionString" />
+  </parameter>
+</parameters>

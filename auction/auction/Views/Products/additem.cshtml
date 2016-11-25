@@ -1,0 +1,168 @@
+﻿@model auction.Models.Product
+@using auction.Models
+
+@{
+    ViewBag.Title = "Create";
+
+}
+<h2>Create</h2>
+
+@using (Html.BeginForm("addproduct", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        
+                               
+{
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+        @* product creation form *@
+        <div class="col-md-6">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">Add Product</div>
+                <div class="panel-body">
+
+
+
+                    @Html.DisplayNameFor(model => model.Title)                   
+                    <input type="text" name="productname" id="productname" class="form-control" required>
+
+                    @Html.DisplayNameFor(model => model.status)
+                    <input type="text" name="status" id="status" class="form-control" required>
+
+                    @Html.DisplayNameFor(model => model.Discription) 
+                    <textarea type="text" name="disc" id="disc" rows="6" cols="20" class="form-control" required></textarea>
+                   
+                     @Html.DisplayNameFor(model => model.Price)
+                    <input type="text" id="price" name="price"  class="form-control" placeholder="0.00" required>
+
+                    
+                    @Html.DisplayNameFor(model => model.Category)
+                   
+
+
+                        @Html.DropDownList("CategoryID",null, new { @id = "CategoryID" })
+
+                    <br />
+                    @*@Html.DropDownList("CategoryID",null, htmlAttributes: new { @id = "SelectCategory", @class = "form-control" })*@
+                       @{
+                           if (Session["UserProfile"] != null)
+                           {
+                               var profile = (auction.Models.User)Session["UserProfile"];
+                           @*@profile.*@
+
+                            @Html.DisplayNameFor(model => model.User.username)
+                            <input id="username" class="form-control" readonly value="@profile.username+@profile.userID">
+                            <input id="userid12" class="form-control" readonly value="@profile.userID">
+                           }
+                    }
+                    <div class="form-group">
+                        Startdate: <input id="stime" name="stime" type="date" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        Enddate: <input id="etime" name="etime" type="date" class="form-control">
+                    </div>
+
+                    Select a file: <input type="file" name="fileUpload" required />
+
+                    <input id="addproduct" type="submit" value="Create Product" class="btn btn-primary btn-block" />
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+ 
+           
+         
+        
+       
+                    
+
+                    
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+                           }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+  
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+ 
+<script>
+      //add item
+    $.ready(function (e) {
+        
+        
+        $('#addproduct').click(
+            function () {
+  
+               
+            var title = $("#productname").val();
+            var status = $("#status").val();
+            var published = $("#published").val();
+            var disc = $("#disc").val();
+            var price = $("#price").val();
+            var catid = $('#SelectCategory:selected').val();
+            var paid = $("#paid").val();
+            var userid12 = $("#userid12").val();
+            var stime = $("#stime").val();
+            var etime = $("#etime").val();
+            
+            alert(catid);
+            //alert("Sucessfully called 1s wih name" + title)
+            $.ajax(
+            {
+
+                url: "/Products/addproduct?&status=" + status +"&title=" + title +  "&published=" + published + "&disc=" + disc + "&price=" + price + "&catid=" + catid + "&userid12=" + userid12 + "&stime=" + stime + "&etime=" + etime
+
+                //+ "&paid=" + paid
+            }
+        ).done(setTimeout(  
+                function () {
+                    alert("Sucessfully called 2nd" + $("#email").val() + $("#password").val())
+
+
+                }, 1000)
+
+        );
+            alert("function called")
+
+
+
+
+
+
+
+
+
+
+            
+
+        })
+    });
+
+
+   
+
+
+</script>
+
+ 

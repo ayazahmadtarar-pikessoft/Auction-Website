@@ -1,0 +1,237 @@
+﻿@model auction.Models.Product
+    @using auction.Models
+
+@{
+    ViewBag.Title = "Create";
+}
+ <h2>Create</h2>
+ 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row"  >
+        @* product creation form *@
+        <div class="col-md-6">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">Add Product</div>
+                <div class="panel-body">
+                  
+                    
+                    
+                      @Html.DisplayNameFor(model => model.Category.Name)
+                   
+                    <input id="name"  class="form-control" >
+                          
+                        
+                            @Html.DisplayNameFor(model => model.Product_Auction.PA_ID)
+                    <input id="name"   class="form-control" readonly>
+                   
+
+
+                          @{
+                              if (Session["UserProfile"] != null)
+                              {
+                                  var profile = (auction.Models.User)Session["UserProfile"];
+                                  //  @profile.username
+
+                                @Html.DisplayNameFor(model => model.User.username)
+                            <input id="username" class="form-control" readonly  value="@profile.username">
+                                  }
+                              }
+
+
+                            
+                        
+                            @Html.DisplayNameFor(model => model.status)
+                        
+                    <input id="saus" class="form-control">
+                        
+                            @Html.DisplayNameFor(model => model.Publisheddate)
+                         
+                    <input id="name" type="datetime-local" class="form-control">
+
+                    @Html.DisplayNameFor(model => model.Category)
+                    @Html.DropDownList("categoryid", null, htmlAttributes: new { @class = "form-control" })
+                         
+                            @Html.DisplayNameFor(model => model.Discription)
+                    <input id="disc" type="text"  class="form-control">
+    
+                         
+                            @Html.DisplayNameFor(model => model.Price)
+                    <input id="price" class="form-control">
+     
+                   
+
+</div>
+
+
+
+                </div>
+             
+        </div>
+ 
+       
+      
+          <div class="col-md-3">
+              <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>Create Auction Object</a>
+              
+              @{
+                  auctionContext db = new auctionContext();
+                  @*var add_pa = new Product_Auction();
+                  db.Product_Auction.Add(add_pa);
+                  db.SaveChanges();
+                  @add_pa.PA_ID*@
+
+                  //db.Product_Auction.Last().PA_ID
+                  //@db.Product_Auction.Count();*@
+                  //db.Product_Auction.Add(new Product_Auction ());
+                  //db.Auctions.Add(new Auction { Auction_Winner = "testwinner",winning_amount=2000,PA_ID=2,Auction_Strat=System.DateTime.Now, Auction_End = System.DateTime.Now,Auction_ID=db.Product_Auction.Last().PA_ID });
+                  //db.SaveChanges();
+                  @*if (Session["UserProfile"] != null)
+                  {
+                      var profile = (auction.Models.User)Session["UserProfile"];
+                      @profile.username 
+                  }*@
+                  <br/>
+                <input id="Submit1" type="submit" value="Create Product" class="btn btn-primary btn-block" onclick="addproduct" />
+            }
+            </div>
+            @* auction creation *@
+            <div class="col-md-3">
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">Auction Section</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            PA_ID: <input id="stime" name="paid"   class="form-control" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            Startdate: <input id="stime" name="name" type="datetime-local" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            Enddate: <input id="fname" name="name" type="datetime-local" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            Winner: <input id="fname" name="name" type="text" placeholder="cant be filled now" class="form-control" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            winning bid:   <input id="fname" name="name" type="text" placeholder="cant be filled now" class="form-control" readonly>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                </div>
+
+
+            </div>
+      </div>
+
+   
+
+
+        <div class="row">
+
+            <link href="~/Content/progress.css" rel="stylesheet" />
+            <div class="container">
+
+
+                <div class="row bs-wizard" style="border-bottom:0;">
+
+                    <div class="col-xs-3 bs-wizard-step complete">
+                        <div class="text-center bs-wizard-stepnum">Step 1</div>
+                        <div class="progress"><div class="progress-bar"></div></div>
+                        <a href="#" class="bs-wizard-dot"></a>
+                        <div class="bs-wizard-info text-center">Fill Product Details</div>
+                    </div>
+
+                    <div class="col-xs-3 bs-wizard-step complete">
+                        <!-- complete -->
+                        <div class="text-center bs-wizard-stepnum">Step 2</div>
+                        <div class="progress"><div class="progress-bar"></div></div>
+                        <a href="#" class="bs-wizard-dot"></a>
+                        <div class="bs-wizard-info text-center">Enter Auction Details</div>
+                    </div>
+
+                    <div class="col-xs-3 bs-wizard-step active">
+                        <!-- complete -->
+                        <div class="text-center bs-wizard-stepnum">Step 3</div>
+                        <div class="progress"><div class="progress-bar"></div></div>
+                        <a href="#" class="bs-wizard-dot"></a>
+                        <div class="bs-wizard-info text-center">Review Entered Informaion</div>
+                    </div>
+
+                    <div class="col-xs-3 bs-wizard-step disabled">
+                        <!-- active -->
+                        <div class="text-center bs-wizard-stepnum">Step 4</div>
+                        <div class="progress"><div class="progress-bar"></div></div>
+                        <a href="#" class="bs-wizard-dot"></a>
+                        <div class="bs-wizard-info text-center"> Submit</div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+
+
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+
+         
+
+        @*<script>
+
+            $(document).ready(
+                function () {
+                    $("#addproduct").click
+                        (
+
+
+                            function () {
+                                var P_id = "1"//$("#P_id").val();
+                                var price = $("#bidamount").val();
+                                var user_id = "1";
+                                $.ajax(
+                                {
+                                    url: "/products/additem?val1=" + P_id + "&val2=" + price + "&val3=" + user_id
+                                }
+                            ).done(setTimeout(
+                                    function () {
+                                        $('#bidmsg').fadeIn('fast');
+                                        $("#bidmsg").hide(4000);
+
+
+                                    }, 1000)
+
+                            );
+                                alert("sd")
+                            }
+                        )
+                }
+            );
+            function addbidinview() {
+
+                alert('function called with values');
+
+            }
+        </script>*@

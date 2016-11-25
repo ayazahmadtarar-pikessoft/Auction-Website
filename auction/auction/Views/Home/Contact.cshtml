@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+@*<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>*@
+
+<div class="row" style="margin-left:15px">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6 col-md-push-3">
+        <h2>Send us Message</h2>
+        <form id="contact_form" action="#" method="POST" enctype="multipart/form-data">
+            <div class="row">
+
+                <label for="name">Your name:</label><br />
+                <input id="name" class="input" name="name" type="text" value="" size="30" /><br />
+            </div>
+            <div class="row">
+                <label for="email">Your email:</label><br />
+                <input id="email" class="input" name="email" type="text" value="" size="30" /><br />
+            </div>
+            <div class="row">
+                <label for="message">Your message:</label><br />
+                <textarea id="message" class="input" name="message" rows="7" cols="30"></textarea><br />
+            </div>
+            <input id="submit_button" type="submit" value="Send email" />
+        </form>
+
+    </div>
+    <div class="col-md-3 col-md-pull-9">
+
+        <address>
+            <h3>Office Location</h3>
+            <p class="lead">
+                <a href="https://www.google.com/maps/preview?ie=UTF-8&q=The+Pentagon&fb=1&gl=us&hq=1400+Defense+Pentagon+Washington,+DC+20301-1400&cid=12647181945379443503&ei=qmYfU4H8LoL2oATa0IHIBg&ved=0CKwBEPwSMAo&safe=on">
+                    The Pentagon<br>
+                    Washington, DC 20301
+                </a><br>
+                Phone: XXX-XXX-XXXX<br>
+                Fax: XXX-XXX-YYYY
+            </p>
+        </address>
+
+        <div class="span8">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4812.217814711784!2d74.34289734164452!3d31.475972711046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391904273c25c31d%3A0xb731313a15a5c7dd!2sArfa+Software+Technology+Park!5e0!3m2!1sen!2s!4v1440446476924" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+
+
+    </div>
+</div>

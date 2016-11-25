@@ -1,0 +1,41 @@
+﻿@model auction.Models.Bid
+
+
+@model IEnumerable<auction.Models.Bid>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+   
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Auction.Auction_Winner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Bid_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Bid_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Bid_ID })
+            </td>
+        </tr>
+
+    }
+
+</table>
+
+

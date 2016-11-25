@@ -1,0 +1,287 @@
+﻿@*@model auction.Models.User*@
+@model Tuple<auction.Models.User, List<auction.Models.Product>>
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+
+<h1 id="nameheader">@Html.DisplayFor(model => model.Item1.username)</h1> 
+<div class="row">
+     
+
+        <div class="col-sm-3">
+            <!--left col-->
+            <div class="panel panel-default">
+                
+                @if (Model.Item1.username != null && Model.Item1.userimgPath != null)
+                {  <img src="@Url.Content(Model.Item1.userimgPath)" class="img-responsive" height="120" width="150" alt="" /> }
+                else
+                {
+                    <img title="profile image" class="img-circle img-responsive" src="~/Images/user-icon-6.png">
+
+                }
+                <form name="imgpanel" id="imgpanel" action="/Users/img" method="post" enctype="multipart/form-data">
+                    Select a file: <input type="file" id="file" name="file" />
+                    <input type="submit" value="Saveimage" />
+                </form>
+
+
+            </div>
+
+            @*<ul class="list-group">
+                <li class="list-group-item text-muted">Profile</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>First Name</strong></span><label id="namelabel">@Html.DisplayFor(model => model.Item1.FirstName)</label></li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Last Name&nbsp; </strong></span><label id="lnamelabel">@Html.DisplayFor(model => model.Item1.LastName)</label></li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Email :</strong></span> <label id="emaillabel">@Html.DisplayFor(model => model.Item1.Email)</label></li>
+
+            </ul>*@
+
+            <div class="panel panel-default">
+                <div class="panel-heading">&nbsp;Social Media </div>
+                <div class="panel-body"><a href="">bootnipets.com</a></div>
+                <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
+            </div>
+
+        
+
+
+            <ul class="list-group">
+                <li class="list-group-item text-muted">
+                    Activity <i class="fa fa-dashboard fa-1x"></i>
+
+                </li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Products</strong></span>@Model.Item2.Count</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Bids</strong></span>13</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Wins</strong></span> 37</li>
+                
+            </ul>
+
+
+
+        </div><!--/col-3-->
+
+        <div class="col-sm-9">
+
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                <li><a href="#messages" data-toggle="tab">Messages</a></li>
+                <li><a href="#settings" data-toggle="tab">Settings</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+
+                                    <th>Title</th>
+                                    <th>Price</th>
+                                    <th>Username</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Dated</th>
+                                </tr>
+                            </thead>
+                            <tbody id="items">
+                                @foreach (var item in Model.Item2)
+                                {
+                                    <tr>
+
+                                        <td>@item.Title</td>
+                                        <td>@item.Price</td>
+                                        <td>@item.User.username</td>
+                                        <td>@item.Category.Name</td>
+                                        <td>@item.status</td>
+                                        <td>@item.Publisheddate</td>
+                                    </tr>
+
+                                }
+
+
+
+
+
+                            </tbody>
+                        </table>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4 text-center">
+                                <ul class="pagination" id="myPager"></ul>
+                            </div>
+                        </div>
+                    </div><!--/table-resp-->
+
+                    <hr>
+
+                </div><!--/tab-pane-->
+                <div class="tab-pane" id="messages">
+
+                    <h2></h2>
+
+                    <ul class="list-group">
+                        <li class="list-group-item text-muted">Inbox</li>
+                        <li class="list-group-item text-right"><a href="#" class="pull-left">Here is your a link to the latest summary report from the..</a> 2.13.2014</li>
+
+
+                    </ul>
+
+                </div><!--/tab-pane-->
+
+
+
+                <div class="tab-pane" id="settings">
+                    <hr>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">First name:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" id="firstname" type="text" value="@Model.Item1.FirstName.ToString()">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Last name:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" id="lastname" type="text" value="@Html.DisplayFor(model => model.Item1.LastName)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Mobile:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" id="mobile" type="text" value="@Html.DisplayFor(model => model.Item1.MobileNo)">
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                            <label class="col-lg-3 control-label">Email:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" id="email" type="text" value="@Model.Item1.Email.ToString()">
+                               
+                            </div>
+                        </div>*@
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Username:</label>
+                            <div class="col-md-8">
+                                <input class="form-control" id="username" name="username" type="text" value="@Model.Item1.username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Password:</label>
+                            <div class="col-md-8">
+                                <input class="form-control" id="password" type="password" value="@Html.DisplayFor(model => model.Item1.Password)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Confirm password:</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="password" value="@Html.DisplayFor(model => model.Item1.Password)">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">userid:</label>
+                            <div class="col-md-8">
+                                @*<input class="form-control" id="userid"  type="text" value="@Html.DisplayFor(model => model.Item1.userID)" readonly>*@
+                                <input id="userid" class="form-control" readonly value="@Model.Item1.userID">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">address:</label>
+                            <div class="col-md-8">
+                                <input class="form-control" id="address" type="text" value="@Html.DisplayFor(model => model.Item1.Address)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-8">
+                                <input id="updateuser" name="updateuser" class="btn btn-primary" value="Save Changes">
+                                <button @Url.Action("Edit", "User", new { firstpara = "param", secondparam = "param" })>somebutton</button>`
+                                <span></span>
+                                <input type="reset" class="btn btn-default" value="Reset">
+
+
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+
+            </div><!--/tab-pane-->
+        </div><!--/tab-content-->
+
+    </div><!--/col-9-->
+    <!--/row-->
+
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+
+    $(document).ready(function (e) {
+        
+        $("#updateuser").click(
+                     
+                         function () {
+                             //alert("update called")
+
+                            var fname = $("#firstname").val();
+                            var lname = $("#lastname").val();
+                            var mobile = $("#mobile").val();
+                            var email = $("#email").val();
+                            var password = $("#password").val();
+                            var address = $("#address").val();
+                            var userid = $("#userid").val();
+                            var username= $("#username").val();
+                            //alert("username is"+username +"Email is" +email);
+                            $.ajax(
+                            {
+                                
+                                url: "/Users/updateprofile?&fname=" + fname + "&lname=" + lname + "&mobile=" + mobile + "&email=" + email + "&userid=" + userid + "&password=" + password + "&address=" + address + "&username=" + username
+                            }
+                        ).done(setTimeout(
+                                function () {
+                                   //alert("Sucessfully called")
+
+
+                                }, 1000)
+
+                        );
+                            alert("sd")
+                        }
+                    )
+            } );
+         
+    //$(document).ready(function (e) {
+
+    //    $("#updateimg").change(
+
+    //                     function () {
+    //                         alert("imagechangecalled called")
+                           
+                                
+
+    //                         $.ajax(
+    //                         {
+
+    //                             // url: "/Users/updateprofile?&fname=" + fname + "&lname=" + lname + "&mobile=" + mobile + "&email=" + email + "&userid=" + userid + "&password=" + password + "&address=" + address + "&username=" + username
+    //                             url: "/Users/updateimage"
+    //                            }
+    //                     ).done(setTimeout(
+    //                             function () {
+    //                                alert("Sucessfully called")
+
+
+    //                             }, 1000)
+
+    //                     );
+    //                            alert("sd")
+    //                     }
+    //                )
+    //});
+
+
+</script>
+
+

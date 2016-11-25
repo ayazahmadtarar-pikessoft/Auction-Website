@@ -1,0 +1,64 @@
+﻿
+<div class="col-lg-3 pull-right">
+    <p class="lead">Shop Name</p>
+    @* bid enter field *@
+    <form>
+        <div class="list-group">
+            <input type="text" class="form-control" name="bidname" id="bidamount" placeholder="Enter your Price" title="enter your password2." />
+            <br />
+            <div class="btn-group">
+                @{
+
+                    int value1 = ViewBag.value1;
+
+                    decimal value2 = ViewBag.value2;
+                    int value3 = ViewBag.value3;
+                    //addbid.addbidinview(Convert.ToInt32( @Html.DisplayFor(model => model.Item1.PA_ID).ToString()), Convert.ToDecimal(Request.Form["bidamount"]), 2);
+                }
+                @value1
+                <input id="Submit1" type="submit" value="submit" />
+                <button type="submit" id="makebid" class="btn btn-primary" onsubmit="addbidj(@value1,@value2,@value3)">Make a Bid</button>
+
+            </div>
+        </div>
+    </form>
+
+
+
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Bid History</h3>
+        </div>
+        <div class="panel-body">
+
+            @foreach (var Item in Model.Item2)
+            {
+               
+
+                <a href=@path>  @Html.DisplayFor(model => Item.User.username)</a>
+
+
+                    <label> @Html.DisplayFor(model => Item.Price)</label>
+
+
+                    
+                    <label>@value1</label>
+                    <label>@value2</label>
+                    <br />
+
+            }
+
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+</div>
