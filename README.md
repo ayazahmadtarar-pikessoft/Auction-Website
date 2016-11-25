@@ -7,3 +7,31 @@
 
 
 #User Interface
+##Add Product
+![Uploading add product.PNG…]()
+
+![Uploading add_product on user login.PNG…]()
+##Add bid
+![Uploading bid.PNG…]()
+##Contact
+![Uploading contact_us.PNG…]()
+##Faq
+![Uploading faq.PNG…]()
+##Home
+![Uploading home.PNG…]()
+##Photo Zoom
+![Uploading image_zoom.PNG…]()
+
+##login
+![Uploading login modal.PNG…]()
+##Product Details
+![Uploading product details.PNG…]()
+##All Products
+![Uploading products.PNG…]()
+##Sign Up
+![Uploading signup.PNG…]()
+##update Profile
+![Uploading update profile.PNG…]()
+##Profile page
+![Uploading user_profile.PNG…]()
+
