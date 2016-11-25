@@ -4,6 +4,15 @@
   This website Allow user to create accout or signin using existing account.User can add products (price and discription).At the time of uploading porduct it ask for Bid start and Bid end time. During this interval other users can add bids on product. When the auction close the user with highest bid will be winner.
 
 #Database Diagram
+![1sterd](https://cloud.githubusercontent.com/assets/8918176/20633292/d2ebcc5e-b366-11e6-8619-7a3dae44ccd8.gif)
+
+
+![erd with cardinality constraints](https://cloud.githubusercontent.com/assets/8918176/20633293/d2efe03c-b366-11e6-9090-3369f3fed90f.png)
+
+
+![final erd with atrribute and datatypes](https://cloud.githubusercontent.com/assets/8918176/20633294/d30c98a8-b366-11e6-87d6-76718c22b5f7.PNG)
+
+![final erd](https://cloud.githubusercontent.com/assets/8918176/20633295/d31202d4-b366-11e6-8889-4cd6d3f32096.PNG)
 
 
 #User Interface
